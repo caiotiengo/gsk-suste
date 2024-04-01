@@ -110,18 +110,17 @@ def main():
 
     st.write(css, unsafe_allow_html=True)
     
-    if "conversation" not in st.session_state:
-        st.session_state.conversation = None
+    if "conversation" not in st.session_state or not st.session_state.conversation:
+        pdf_files = read_pdfs_in_folder("./pdfs")
+        text_pdf = combine_texts(pdf_files)
+        if text_pdf:
+            text_chunks = get_chunk_text(text_pdf)
+            vector_store = get_vector_store(text_chunks)
+            #demo = True
+            st.session_state.conversation = get_conversation_chain(vector_store)
 
     if "chat_history" not in st.session_state:
-        st.session_state.chat_history = None
-    pdf_files = read_pdfs_in_folder("./pdfs")
-    text_pdf = combine_texts(pdf_files)
-    if text_pdf:
-        text_chunks = get_chunk_text(text_pdf)
-        vector_store = get_vector_store(text_chunks)
-        #demo = True
-        st.session_state.conversation = get_conversation_chain(vector_store)
+        st.session_state.chat_history = []
 
     st.header('Relatório de sustentabilidade')
     with st.form("Question",clear_on_submit=True):

@@ -28,7 +28,11 @@ visibility: hidden;
 }
  .stTextArea {
       position: fixed !important;
-      bottom: 4rem !important;
+      bottom: 0rem !important;
+      z-index: 100000  !important;
+      padding-bottom: 45px  !important;
+      background: #0e1117  !important;
+
     }
  .st-emotion-cache-19rxjzo ef3psqc7 {
         position: fixed !important;
@@ -45,9 +49,9 @@ visibility: hidden;
      border: 0  !important;
  }
  .css-1q8dd3e {
-       position: fixed !important;
-        bottom: 20px !important;
-        right: 36rem !important;
+    position: fixed !important;
+    bottom: 20px !important;
+    z-index: 1000000 !important;
  }
 '''
 
