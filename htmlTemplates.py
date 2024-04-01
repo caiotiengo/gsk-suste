@@ -30,7 +30,7 @@ visibility: hidden;
       position: fixed !important;
       bottom: 0rem !important;
       z-index: 100000  !important;
-      padding-bottom: 45px  !important;
+      padding-bottom: 62px  !important;
       background: #0e1117  !important;
 
     }
@@ -53,6 +53,8 @@ visibility: hidden;
     bottom: 20px !important;
     z-index: 1000000 !important;
  }
+  #MainMenu {visibility: hidden;}
+  footer {visibility: hidden;}
 '''
 
 bot_template = '''
