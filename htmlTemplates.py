@@ -35,11 +35,11 @@ visibility: hidden;
         bottom: 1rem !important;
  }
  .st-emotion-cache-1xw8zd0{
-    border: 0;
+    border: 0  !important;
  }
  .st-emotion-cache-19rxjzo ef3psqc7{
-    position: fixed;
-    bottom: 12px;
+    position: fixed  !important;
+    bottom: 12px  !important;
  }
 '''
 
