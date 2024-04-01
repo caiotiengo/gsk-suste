@@ -41,6 +41,13 @@ visibility: hidden;
     position: fixed  !important;
     bottom: 12px  !important;
  }
+ .css-1p05t8e{
+     border: 0  !important;
+ }
+ .css-1q8dd3e edgvbvh5{
+    position: fixed  !important;
+    bottom: 12px  !important;
+ }
 '''
 
 bot_template = '''
