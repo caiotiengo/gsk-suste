@@ -26,6 +26,14 @@ visibility: hidden;
   padding: 0 1.5rem;
   color: #fff;
 }
+ .stTextArea {
+      position: fixed !important;
+      bottom: 4rem !important;
+    }
+ .st-emotion-cache-19rxjzo ef3psqc7 {
+        position: fixed !important;
+        bottom: 1rem !important;
+ }
 '''
 
 bot_template = '''

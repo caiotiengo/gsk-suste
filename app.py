@@ -11,6 +11,7 @@ from htmlTemplates import bot_template, user_template, css
 import os
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 from transformers import pipeline
+import PyPDF2
 
 def get_pdf_text(pdf_files):
     
@@ -80,11 +81,28 @@ def handle_user_input(question):
             else:
                 st.write(bot_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
     else:
-        st.error("Conversation not initialized. Please upload your PDFs first.")
+        st.error("Erro ao carregar a base de dados, tente novamente mais tarde.")
 
 def submit():
     st.session_state.my_text = st.session_state.widget
     st.session_state.widget = ""
+
+def read_pdfs_in_folder(folder_path):
+    pdf_contents = []
+    for filename in os.listdir(folder_path):
+        if filename.endswith(".pdf"):
+            filepath = os.path.join(folder_path, filename)
+            with open(filepath, "rb") as file:
+                pdf_reader = PyPDF2.PdfReader(file)
+                pdf_text = ""
+                for page_num in range(len(pdf_reader.pages)):
+                    pdf_text += pdf_reader.pages[page_num].extract_text()
+                pdf_contents.append(pdf_text)
+    return pdf_contents
+
+def combine_texts(pdf_texts):
+    combined_text = "\n\n\n".join(pdf_texts)
+    return combined_text
 
 def main():
     load_dotenv()
@@ -97,37 +115,24 @@ def main():
 
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = None
-    
-    st.header('Relatório de sustentabilidade')
-    question = st.text_input("Faça a sua pergunta: ", value="",  help="Exemplo: Qual é a política de sustentabilidade da empresa?", key="none")
+    pdf_files = read_pdfs_in_folder("./pdfs")
+    text_pdf = combine_texts(pdf_files)
+    if text_pdf:
+        text_chunks = get_chunk_text(text_pdf)
+        vector_store = get_vector_store(text_chunks)
+        #demo = True
+        st.session_state.conversation = get_conversation_chain(vector_store)
 
-    if question and st.button("Enviar"):
-        handle_user_input(question)
-    
+    st.header('Relatório de sustentabilidade')
+    with st.form("Question",clear_on_submit=True, border=False):
+        user_question = st.text_area("Faça a sua pergunta: ", value="", help="Exemplo: Qual é a política de sustentabilidade da empresa?", key="none")
+        submitted = st.form_submit_button("Enviar ✅", type="secondary")
+        if submitted:
+            handle_user_input(user_question)
 
     with st.sidebar:
-        st.subheader("Upload your Documents Here: ")
-        pdf_files = st.file_uploader("Choose your PDF Files and Press OK", type=['pdf'], accept_multiple_files=True)
-    
-        if st.button("OK"):
-            with st.spinner("Processing your PDFs..."):
-
-                # Get PDF Text
-                raw_text = get_pdf_text(pdf_files)
-
-                # Get Text Chunks
-                text_chunks = get_chunk_text(raw_text)
-                
-
-                # Create Vector Store
-                
-                vector_store = get_vector_store(text_chunks)
-                st.write("DONE")
-
-                # Create conversation chain
-
-                st.session_state.conversation =  get_conversation_chain(vector_store)
-
+        st.subheader("Arquivos carregados:")
+        st.write("Os Relatórios de sustentabilidade carregados foram referentes aos anos de 2019, 2020 e 2022.")
 
 if __name__ == '__main__':
     main()
