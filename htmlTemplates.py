@@ -3,6 +3,9 @@ css = '''
 .chat-message {
     padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1rem; display: flex
 }
+.css-pxxe24 {
+visibility: hidden;
+}
 .chat-message.user {
     background-color: #2b313e
 }
@@ -28,7 +31,7 @@ css = '''
 bot_template = '''
 <div class="chat-message bot">
     <div class="avatar">
-        <img src="https://i.ibb.co/cN0nmSj/Screenshot-2023-05-28-at-02-37-21.png">
+        <img src="https://99prod.s3.amazonaws.com/uploads/8fc44766-d490-47b0-9792-b9aeff8848dd/598927_541420932593531_1192935286_n.png">
     </div>
     <div class="message">{{MSG}}</div>
 </div>
@@ -37,7 +40,7 @@ bot_template = '''
 user_template = '''
 <div class="chat-message user">
     <div class="avatar">
-        <img src="https://i.ibb.co/rdZC7LZ/Photo-logo-1.png">
+        <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png">
     </div>    
     <div class="message">{{MSG}}</div>
 </div>
