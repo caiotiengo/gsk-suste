@@ -124,7 +124,7 @@ def main():
         st.session_state.conversation = get_conversation_chain(vector_store)
 
     st.header('Relatório de sustentabilidade')
-    with st.form("Question",clear_on_submit=True, border=False):
+    with st.form("Question",clear_on_submit=True):
         user_question = st.text_area("Faça a sua pergunta: ", value="", help="Exemplo: Qual é a política de sustentabilidade da empresa?", key="none")
         submitted = st.form_submit_button("Enviar ✅", type="secondary")
         if submitted:
