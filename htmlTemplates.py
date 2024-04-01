@@ -44,7 +44,7 @@ visibility: hidden;
  .css-1p05t8e{
      border: 0  !important;
  }
- .css-1q8dd3e edgvbvh5{
+ .css-1q8dd3e {
        position: fixed !important;
         bottom: 20px !important;
         right: 36rem !important;
