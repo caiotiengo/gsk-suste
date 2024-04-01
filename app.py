@@ -98,7 +98,7 @@ def main():
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = None
     
-    st.header('Relatório de sustentabilidade', divider='orange')
+    st.header('Relatório de sustentabilidade')
     question = st.text_input("Faça a sua pergunta: ", value="",  help="Exemplo: Qual é a política de sustentabilidade da empresa?", key="none")
 
     if question and st.button("Enviar"):
