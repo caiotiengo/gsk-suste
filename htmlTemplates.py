@@ -34,6 +34,13 @@ visibility: hidden;
         position: fixed !important;
         bottom: 1rem !important;
  }
+ .st-emotion-cache-1xw8zd0{
+    border: 0;
+ }
+ .st-emotion-cache-19rxjzo ef3psqc7{
+    position: fixed;
+    bottom: 12px;
+ }
 '''
 
 bot_template = '''

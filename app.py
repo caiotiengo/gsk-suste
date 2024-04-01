@@ -54,7 +54,7 @@ def get_conversation_chain(vector_store):
     
     # OpenAI Model
 
-    llm = ChatOpenAI()
+    llm = ChatOpenAI(model_name='gpt-3.5-turbo-16k')
 
     # HuggingFace Model
 
@@ -126,7 +126,7 @@ def main():
     st.header('Relatório de sustentabilidade')
     with st.form("Question",clear_on_submit=True):
         user_question = st.text_area("Faça a sua pergunta: ", value="", help="Exemplo: Qual é a política de sustentabilidade da empresa?", key="none")
-        submitted = st.form_submit_button("Enviar ✅", type="secondary")
+        submitted = st.form_submit_button("Enviar ✅")
         if submitted:
             handle_user_input(user_question)
 
