@@ -45,8 +45,9 @@ visibility: hidden;
      border: 0  !important;
  }
  .css-1q8dd3e edgvbvh5{
-    position: fixed  !important;
-    bottom: 12px  !important;
+       position: fixed !important;
+        bottom: 20px !important;
+        right: 36rem !important;
  }
 '''
 
