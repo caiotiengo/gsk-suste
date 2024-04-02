@@ -53,7 +53,7 @@ def get_conversation_chain(vector_store):
     
     # OpenAI Model
 
-    llm = ChatOpenAI(model_name='gpt-3.5-turbo')
+    llm = ChatOpenAI(model_name='gpt-3.5-turbo', temperature=1)
 
     # HuggingFace Model
 
