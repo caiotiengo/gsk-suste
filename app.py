@@ -14,7 +14,6 @@ from transformers import pipeline
 import PyPDF2
 
 def get_pdf_text(pdf_files):
-    
     text = ""
     for pdf_file in pdf_files:
         reader = PdfReader(pdf_file)
@@ -54,7 +53,7 @@ def get_conversation_chain(vector_store):
     
     # OpenAI Model
 
-    llm = ChatOpenAI(model_name='gpt-3.5-turbo-16k')
+    llm = ChatOpenAI(model_name='gpt-3.5-turbo')
 
     # HuggingFace Model
 
@@ -93,16 +92,17 @@ def read_pdfs_in_folder(folder_path):
         if filename.endswith(".pdf"):
             filepath = os.path.join(folder_path, filename)
             with open(filepath, "rb") as file:
-                pdf_reader = PyPDF2.PdfReader(file)
-                pdf_text = ""
-                for page_num in range(len(pdf_reader.pages)):
-                    pdf_text += pdf_reader.pages[page_num].extract_text()
+                pdf_files = [file]
+                pdf_text = get_pdf_text(pdf_files)
                 pdf_contents.append(pdf_text)
     return pdf_contents
 
 def combine_texts(pdf_texts):
-    combined_text = "\n\n\n".join(pdf_texts)
-    return combined_text
+    if len(pdf_texts) == 1:
+        return pdf_texts
+    else:
+        combined_text = "\n\n\n".join(pdf_texts)
+        return combined_text
 
 def main():
     load_dotenv()
@@ -112,11 +112,11 @@ def main():
     
     if "conversation" not in st.session_state or not st.session_state.conversation:
         pdf_files = read_pdfs_in_folder("./pdfs")
-        text_pdf = combine_texts(pdf_files)
-        if text_pdf:
-            text_chunks = get_chunk_text(text_pdf)
+        #text_pdf = combine_texts(pdf_files)
+        if pdf_files:
+            text_chunks = get_chunk_text(pdf_files[0])
             vector_store = get_vector_store(text_chunks)
-            #demo = True
+            demo = True
             st.session_state.conversation = get_conversation_chain(vector_store)
 
     if "chat_history" not in st.session_state:
