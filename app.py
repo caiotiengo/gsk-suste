@@ -79,6 +79,8 @@ def handle_user_input(question):
                 st.write(user_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
             else:
                 st.write(bot_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
+                st.markdown("""<script>scrollToForm()</script>""", unsafe_allow_html=True)
+
     else:
         st.error("Erro ao carregar a base de dados, tente novamente mais tarde.")
 
@@ -106,7 +108,7 @@ def combine_texts(pdf_texts):
 
 def main():
     load_dotenv()
-    st.set_page_config(page_title='Hanno AI - Relatório de sustentabilidade', page_icon='https://99prod.s3.amazonaws.com/uploads/8fc44766-d490-47b0-9792-b9aeff8848dd/598927_541420932593531_1192935286_n.png', initial_sidebar_state = 'collapsed')
+    st.set_page_config(page_title='Relatório de sustentabilidade', page_icon='https://99prod.s3.amazonaws.com/uploads/8fc44766-d490-47b0-9792-b9aeff8848dd/598927_541420932593531_1192935286_n.png', initial_sidebar_state = 'collapsed')
 
     st.write(css, unsafe_allow_html=True)
     
@@ -131,7 +133,7 @@ def main():
 
     with st.sidebar:
         st.subheader("Arquivos carregados:")
-        st.write("Os Relatórios de sustentabilidade carregados foram referentes aos anos de 2019, 2020 e 2022.")
+        st.write("Os Relatórios de sustentabilidade carregados foram referentes aos anos de 2019, 2020, 2021 e 2022.")
 
 if __name__ == '__main__':
     main()

@@ -55,6 +55,19 @@ visibility: hidden;
  }
   #MainMenu {visibility: hidden;}
   footer {visibility: hidden;}
+  </style>
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function scrollToForm() {
+            var element = document.querySelector('[data-testid="stForm"]');
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            }
+        }
+
+        scrollToForm();
+    });
+</script>
 '''
 
 bot_template = '''
